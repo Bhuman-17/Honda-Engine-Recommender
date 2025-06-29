@@ -1,10 +1,3 @@
-Here is your **final `README.md`** with working image links using **GitHub raw URLs** so they display correctly on the GitHub page.
-
----
-
-### ✅ Replace `README.md` contents with the following:
-
-````markdown
 # 🧠 Honda Engine Recommendation System
 
 ![Flask](https://img.shields.io/badge/Framework-Flask-blue)
