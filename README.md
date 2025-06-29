@@ -13,35 +13,35 @@ An intelligent, ML-powered **Flask web application** that recommends the most su
 ### 🎛️ Input Form
 > Users select engine requirements using a structured dropdown interface.
 
-![Input Form](/mnt/data/0297241a-8190-4c89-ac54-7d0d1317591f.png)
+![Input Form](assets/input_form.png)
 
 ---
 
 ### 📊 Output Prediction + Top 3 Matches
 > Results page displays predicted **series**, detailed **specs**, and the **top 3 closest engine options**.
 
-![Prediction Output](/mnt/data/59966f35-982d-4759-a04f-01302d38e304.png)
+![Prediction Output](assets/prediction_result.png)
 
 ---
 
 ### 📈 Dashboard (Power BI Analysis)
 > Embedded Power BI visuals give a breakdown of engine data across series, product types, and key features.
 
-![Dashboard](/mnt/data/d846c721-3d4e-403f-a110-b66a8d7f8dfa.png)
+![Dashboard](assets/dashboard.png)
 
 ---
 
 ### ❓ Why Honda
 > Informational section showcasing Honda's strengths, quality, and innovation.
 
-![Why Honda Page](/mnt/data/c0c2dcf8-1911-4ef8-9736-846063143040.png)
+![Why Honda Page](assets/why_honda.png)
 
 ---
 
 ### 🔚 Homepage
 > Landing page welcoming users and guiding them through the recommendation process.
 
-![Homepage](/mnt/data/2a2ce313-e01b-42af-b9f4-37c9a3a5575f.png)
+![Homepage](assets/homepage.png)
 
 ---
 
