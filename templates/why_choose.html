@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Why Choose Honda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #f5f7fa, #e3e6ea);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(to right, #b31217, #e52d27);
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+      animation: fadeDown 1.5s ease-out;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* ✅ Navbar Styles */
+    nav.navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #d62020;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav.navbar a {
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    nav.navbar a:hover {
+      background-color: #aa1a1a;
+      border-radius: 4px;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .block {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+      overflow: hidden;
+      animation: slideUp 1.2s ease;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .block:hover {
+      transform: scale(1.015);
+    }
+
+    .block img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .block-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .block-content h2 {
+      color: #d62020;
+      font-size: 1.8em;
+      margin-top: 0;
+    }
+
+    .block-content p {
+      font-size: 1.05em;
+      color: #444;
+    }
+
+    footer {
+      background-color: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 0.9em;
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #d62020;
+      color: #fff;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+
+    #backToTop:hover {
+      background-color: #a00;
+    }
+
+    @keyframes fadeDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .block {
+        flex-direction: column;
+      }
+
+      .block img {
+        width: 100%;
+        max-height: 250px;
+      }
+
+      .block-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Why Honda</h1>
+  </header>
+
+  <!-- ✅ Navigation Bar -->
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/recommender">Recommender</a>
+  </nav>
+
+  <section>
+    <div class="block">
+      <img src="https://engines.honda.com/-/media/Images/pages/why/race-car.ashx" alt="Honda Racing">
+      <div class="block-content">
+        <h2>Experience Counts</h2>
+        <p>As the world’s largest engine manufacturer, Honda offers more engine experience than anyone. Experience born on racetracks and roadways around the globe. Experience that keeps us on the cutting edge of engine performance technology.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <img src="https://engines.honda.com/-/media/Images/pages/why/performance.ashx" alt="Superior Performance">
+      <div class="block-content">
+        <h2>Superior Performance</h2>
+        <p>Better fuel efficiency. Higher power output. Quieter performance. Easier to use. No matter how you define superior engine performance, Honda engines set the standard.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <img src="https://engines.honda.com/-/media/Images/pages/why/reliability.ashx" alt="Reliability">
+      <div class="block-content">
+        <h2>Superior Reliability and Quality</h2>
+        <p>Honda engines are built with high-quality components designed for optimum performance in the harshest environments. Our GX engines (100cc and larger) come with a leading 3-year commercial warranty. Just ask a Honda user—they’ll tell you they wouldn’t use anything else.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <img src="https://engines.honda.com/-/media/Images/pages/why/nationwide-parts.ashx" alt="Nationwide Support">
+      <div class="block-content">
+        <h2>Nationwide Parts and Service Support</h2>
+        <p>Honda has a vast nationwide support network of over 14,000 dealers. From parts to service, Honda engine dealers are there to assist you whenever and wherever you need it.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>2025 © American Honda Motor Co., Inc. All information contained herein applies to U.S. products only.</p>
+  </footer>
+
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+
+  <script>
+    window.onscroll = function() {
+      document.getElementById("backToTop").style.display = window.scrollY > 300 ? "block" : "none";
+    };
+  </script>
+</body>
+</html>

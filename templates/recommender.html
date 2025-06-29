@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Honda Engine Recommender</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url('https://imgs.search.brave.com/wMc9zoCpkoc9t2BwNtpIqp4hTCMPM4AVWLMX-U6i_2k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTYy/NjUwMS9waG90by9h/LWphcGFuZXNlLWVu/Z2luZS10ZWNobmlj/aWFuLXdvcmtzLW9u/LWEtaG9uZGEtcmEx/MDllLXYxMC1lbmdp/bmUtaW4tdGhlLWhv/bmRhLW1hcmxib3Jv/LW1jbGFyZW4uanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPUUx/SFNyV2RMQzlCNHdi/ZUtmMEtydkotc1R1/VDZHbk1iV19IM3lM/cFRHWkU9');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      padding: 40px 20px;
+      color: #fff;
+      animation: fadeInPage 3s ease-in-out;
+    }
+
+    nav.navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #d62020;
+      padding: 12px 0;
+      margin-bottom: 40px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav.navbar a {
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    nav.navbar a:hover {
+      background-color: #aa1a1a;
+      border-radius: 4px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffcc00;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8em;
+      animation: bounceIn 1.8s ease-in-out;
+    }
+
+    form {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      max-width: 700px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+      animation: scaleIn 2s ease-in-out;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 25px;
+      font-weight: bold;
+      animation: fadeUp 1.5s ease-in-out both;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      background-color: #f5f5f5;
+      color: #333;
+      animation: dropIn 2s ease-in-out both;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background-color: #d8191c;
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s, transform 0.3s;
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    button:hover {
+      background-color: #a91413;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes dropIn {
+      0% { transform: translateY(-30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px #ff3333; }
+      50% { box-shadow: 0 0 25px #ff3333; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/why_choose">Why Honda</a>
+  </nav>
+
+  <h1>🔧 Configure Your Honda Engine</h1>
+
+  <form action="/results" method="post">
+    {% for label, values in options.items() %}
+      <label>{{ label }}:
+        <select name="{{ label|lower|replace(' ', '_') }}" required>
+          <option disabled selected value="">Select {{ label }}</option>
+          {% for v in values %}
+            <option value="{{ v }}">{{ v }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    {% endfor %}
+
+    <label>Engine Displacement (cc):
+      <select name="displacement" required>
+        <option disabled selected value="">Select Displacement</option>
+        {% for val in displacements %}
+          <option value="{{ val }}">{{ val }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Maximum Power (HP):
+      <select name="power" required>
+        <option disabled selected value="">Select Power</option>
+        {% for val in powers %}
+          <option value="{{ val }}">{{ val }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <button type="submit">🔍 Search & Predict</button>
+  </form>
+</body>
+</html>

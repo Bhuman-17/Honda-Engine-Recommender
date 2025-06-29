@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;500&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-image: url('https://imgs.search.brave.com/cGeh1RWuuS0cY9hF7sZ7ymG_dGp1zeJTfOP6WguR-hw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE1/NDM1MzIwNC9waG90/by9jbG9zZXVwLWdl/YXJib3gtaW5zaWRl/LXRydWNrLXVuZGVy/aG9vZC1ibGFjay1h/bmQtd2hpdGUtdmlu/dGFnZS10b25lLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1Q/T0EtZU9KLVpDaWhj/Qk9KY2doTHY5LTFB/bUZIWG5RVlNYMVZr/VjFVNGh3PQ');
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: white;
+      animation: fadeIn 2s ease-in;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      animation: slideIn 1.5s ease-out;
+    }
+
+    /* ✅ Navigation bar styles */
+    nav.navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #d62020;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav.navbar a {
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    nav.navbar a:hover {
+      background-color: #aa1a1a;
+      border-radius: 4px;
+    }
+
+    main {
+      background: rgba(0, 0, 0, 0.75);
+      margin: 40px auto;
+      padding: 30px;
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+      animation: popUp 1.5s ease-in-out;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .spec-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h3, h4 {
+      color: #ffcc00;
+      text-shadow: 1px 1px 2px black;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    li {
+      margin: 10px 0;
+      font-size: 1.1em;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      animation: popUp 1s ease-in-out;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 1em;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #aaa;
+    }
+
+    th {
+      background: rgba(255, 204, 0, 0.9);
+      color: #000;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideIn {
+      from {transform: translateY(-100px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @keyframes popUp {
+      0% {transform: scale(0.8); opacity: 0;}
+      100% {transform: scale(1); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prediction Results</h1>
+  </header>
+
+  <!-- ✅ Navigation Bar -->
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/recommender">Recommender</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/why_choose">Why Honda</a>
+  </nav>
+
+  <main>
+    {% if error %}
+      <p class="error">❌ {{ error }}</p>
+    {% else %}
+      <h3>🔷 Predicted Series: {{ predicted_series }}</h3>
+      <img src="https://imgs.search.brave.com/Zb1F8u9RYjO8I35ZSdF7sX9RUBoSz-u7P7lHXM675Ho/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vcGhvdG9z/L2xlYXJuaW5nLWZy/b20tdGhlLWJlc3Qt/cGljdHVyZS1pZDQ3/Nzc0OTY3OD9rPTIw/Jm09NDc3NzQ5Njc4/JnM9NjEyeDYxMiZ3/PTAmaD03Y1NoMzdZ/S2VHNzVFU0NzdHB2/eHlDb2puMlAxVEdu/Zi1pc05yZUZqMk9v/PQ" alt="Recommendation Engine" class="spec-image">
+      <ul>
+        {% for name, val in predicted_specs.items() %}
+          <li><strong>{{ name }}:</strong> {{ val }}</li>
+        {% endfor %}
+      </ul>
+      <h4>🏁 Top 3 Closest Matching Engines</h4>
+      <table>
+        <thead>
+          <tr>
+            {% for col in top3[0].keys() %}
+              <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in top3 %}
+            <tr>
+              {% for val in row.values() %}
+                <td>{{ val }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </main>
+</body>
+</html>

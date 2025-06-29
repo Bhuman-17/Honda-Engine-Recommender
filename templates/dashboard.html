@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Honda Dashboard Overview</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-image: url('https://imgs.search.brave.com/wMc9zoCpkoc9t2BwNtpIqp4hTCMPM4AVWLMX-U6i_2k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTYy/NjUwMS9waG90by9h/LWphcGFuZXNlLWVu/Z2luZS10ZWNobmlj/aWFuLXdvcmtzLW9u/LWEtaG9uZGEtcmEx/MDllLXYxMC1lbmdp/bmUtaW4tdGhlLWhv/bmRhLW1hcmxib3Jv/LW1jbGFyZW4uanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPUUx/SFNyV2RMQzlCNHdi/ZUtmMEtydkotc1R1/VDZHbk1iV19IM3lM/cFRHWkU9');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #fff;
+      animation: fadeInPage 2s ease-in;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #d62020;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #aa1a1a;
+      border-radius: 4px;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8em;
+      color: #ffcc00;
+      margin-top: 50px;
+    }
+
+    .container {
+      max-width: 900px;
+      background: rgba(0, 0, 0, 0.7);
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      animation: slideUp 1.5s ease;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    li {
+      margin: 15px 0;
+      font-size: 1.1em;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 16px;
+      border-left: 4px solid #ff3333;
+      border-radius: 6px;
+    }
+
+    .dashboard-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .dashboard-link:hover {
+      background-color: #e6b800;
+    }
+
+    .preview-img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      margin-bottom: 25px;
+    }
+
+    @keyframes fadeInPage {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="/">Home</a>
+    <a href="/recommender">Engine Recommender</a>
+    <a href="/why_choose">Why Choose</a>
+  </div>
+
+  <h1>Honda Engine Dashboard Overview</h1>
+
+  <div class="container">
+    <img class="preview-img" src="https://imgs.search.brave.com/JjNefzoDF4rx6W1ClR7khQdQPsu-gCZH3L6Ka2w3_58/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzEyLzAwLzkxLzA3/LzM2MF9GXzEyMDA5/MTA3MzFfUEZLTm0z/eHR0eUlob3M4OTNh/WDJrVHVDUjFTVVE3/NmUuanBn" alt="Dashboard Preview Image">
+
+    <a class="dashboard-link" href="https://app.powerbi.com/links/S4wpAjcAwl?ctid=711fa2ae-8398-46c5-8e29-e985045948d3&pbi_source=linkShare" target="_blank">
+      View Full Power BI Dashboard
+    </a>
+
+    <ul>
+      <li>This dashboard presents Honda engine models categorised by series and design types.</li>
+      <li>It visually compares engine displacement and power to highlight performance trends.</li>
+      <li>The most frequently used engine series and high-efficiency variants are easy to identify.</li>
+      <li>Insights into dry weight, shaft diameter, and engine configurations are included.</li>
+      <li>It helps quickly understand distribution patterns across key technical parameters.</li>
+    </ul>
+  </div>
+</body>
+</html>

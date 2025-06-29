@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Honda Engine Recommender</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400&display=swap');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      background: #111;
+      color: #fff;
+      animation: slideDown 1.5s ease;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      height: 400px;
+    }
+
+    .slides {
+      display: flex;
+      width: 100%;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 400px;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .label {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #d62020;
+      color: white;
+      padding: 5px 10px;
+      font-weight: bold;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 2em;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      margin: 10px 0;
+      animation: fadeIn 2s ease;
+    }
+
+    header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4em;
+      font-style: italic;
+      animation: fadeIn 2.5s ease;
+      margin-bottom: 10px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #d62020;
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #aa1a1a;
+      border-radius: 4px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 12px;
+      padding: 12px 24px;
+      font-size: 1.1em;
+      background-color: #d62020;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: 0.3s;
+      animation: slideUp 1.5s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #aa1a1a;
+    }
+
+    .info-section {
+      margin-top: 40px;
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .engine-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 20px auto;
+      max-width: 800px;
+      padding: 20px;
+      background: #fff;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .engine-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .engine-card h3 {
+      margin-top: 15px;
+      font-size: 1.6em;
+      color: #d62020;
+    }
+
+    .engine-card p {
+      margin: 5px 0;
+    }
+
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9em;
+    }
+
+    footer img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="carousel">
+      <div class="arrow left" onclick="moveSlide(-1)">&#10094;</div>
+      <div class="arrow right" onclick="moveSlide(1)">&#10095;</div>
+      <div class="slides" id="slider">
+        <div class="slide"><img src="https://wieck-honda-production.s3.amazonaws.com/photos/f305e6b35fc9accc338c2a84764ceaee540282ec/preview-928x522.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="https://engines.honda.com/-/media/Images/Banners/Home/engine-hero-1.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="https://engines.honda.com/-/media/Images/Banners/Home/engine-hero2.jpg" alt="Slide 3"></div>
+        <div class="slide"><img src="https://engines.honda.com/-/media/Images/Banners/promotions/Honda-Engine-hero-igx430.jpg" alt="Slide 4"><div class="label">Coming Soon</div></div>
+        <div class="slide"><img src="https://engines.honda.com/-/media/Images/Banners/Home/hero-home-eGX.jpg" alt="Slide 5"><div class="label">Coming Soon</div></div>
+      </div>
+    </div>
+    <h1>Honda Engine Predictor</h1>
+    <h2>By Bhuman Wadekar</h2>
+  </header>
+
+  <nav class="navbar">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/recommender">Recommender</a>
+    <a href="/why_choose">Why Choose Honda</a>
+  </nav>
+
+  <main>
+    <p>Welcome to the Honda Engine Recommendation System. This tool predicts the engine series and specifications based on user input and shows top 3 engine matches.</p>
+    <button onclick="toggleInfo()" class="btn">Show Engine Info</button>
+
+    <div id="info" class="info-section">
+      <div class="engine-card">
+        <img src="https://engines.honda.com/-/media/Images/Banners/Models/gc-series.ashx" alt="GC Residential">
+        <h3>GC Series - Residential Use</h3>
+        <p><strong>Best For:</strong> Pressure washers, tillers, lawnmowers</p>
+        <p><strong>Use Case:</strong> Home and light-duty applications</p>
+      </div>
+      <div class="engine-card">
+        <img src="https://engines.honda.com/-/media/Images/Banners/Models/gx-series.ashx" alt="GX Commercial">
+        <h3>GX Series - Commercial Grade</h3>
+        <p><strong>Best For:</strong> Construction, agricultural, and rental equipment</p>
+        <p><strong>Use Case:</strong> Heavy-duty and commercial performance</p>
+      </div>
+      <div class="engine-card">
+        <img src="https://engines.honda.com/-/media/Images/Banners/Models/igx-series.ashx" alt="iGX Smart Engine">
+        <h3>iGX Series - Smart Commercial</h3>
+        <p><strong>Best For:</strong> Advanced equipment needing electronic control</p>
+        <p><strong>Use Case:</strong> Generator systems, hydraulic pumps</p>
+      </div>
+      <div class="engine-card">
+        <img src="https://engines.honda.com/-/media/Images/Banners/Models/vtwin-series.ashx" alt="V-Twin">
+        <h3>V-Twin Series - High Power Commercial</h3>
+        <p><strong>Best For:</strong> Zero-turn mowers, construction machines</p>
+        <p><strong>Use Case:</strong> High torque, dual-cylinder reliability</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <img src="{{ url_for('static', filename='Screenshot 2025-06-10 020219.png') }}" alt="Honda Logos Footer">
+    <p>2025 © American Honda Motor Co., Inc. All information contained herein applies to U.S. products only.</p>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    function moveSlide(step) {
+      const slider = document.getElementById("slider");
+      const totalSlides = slider.children.length;
+      currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function toggleInfo() {
+      const info = document.getElementById('info');
+      info.style.display = info.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
